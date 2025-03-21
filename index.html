@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - RSR International Pvt Ltd</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <h1>RSR International Pvt Ltd</h1>
+    <p>Created by Siddha Batala (9803282511 | sidbatala@gmail.com)</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+      <li><a href="orders.html"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+      <li><a href="products.html"><i class="fas fa-box"></i> Products</a></li>
+      <li><a href="customers.html"><i class="fas fa-users"></i> Customers</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="dashboard">
+      <h2>Dashboard</h2>
+      <div class="metrics">
+        <div class="metric-card">
+          <i class="fas fa-chart-line"></i>
+          <h3>Total Orders</h3>
+          <p id="total-orders">0</p>
+        </div>
+        <div class="metric-card">
+          <i class="fas fa-clock"></i>
+          <h3>Pending Orders</h3>
+          <p id="pending-orders">0</p>
+        </div>
+        <div class="metric-card">
+          <i class="fas fa-check-circle"></i>
+          <h3>Completed Orders</h3>
+          <p id="completed-orders">0</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    // Update Metrics
+    document.getElementById('total-orders').textContent = orders.length;
+    document.getElementById('pending-orders').textContent = orders.filter(order => order.status === 'Pending').length;
+    document.getElementById('completed-orders').textContent = orders.filter(order => order.status === 'Completed').length;
+  </script>
+</body>
+</html>
