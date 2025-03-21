@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customers - RSR International Pvt Ltd</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <h1>RSR International Pvt Ltd</h1>
+    <p>Created by Siddha Batala (9803282511 | sidbatala@gmail.com)</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+      <li><a href="orders.html"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+      <li><a href="products.html"><i class="fas fa-box"></i> Products</a></li>
+      <li><a href="customers.html"><i class="fas fa-users"></i> Customers</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="customers">
+      <h2>Customer Management</h2>
+      <button id="add-customer-btn"><i class="fas fa-plus"></i> Add Customer</button>
+      <table id="customer-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Modal for Add/Edit Customer -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3 id="modal-title">Add Customer</h3>
+      <form id="customer-form">
+        <input type="text" id="customer-name" placeholder="Customer Name" required>
+        <input type="email" id="customer-email" placeholder="Email" required>
+        <input type="tel" id="customer-phone" placeholder="Phone" required>
+        <button type="submit">Save</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast"></div>
+
+  <script src="script.js"></script>
+  <script>
+    // DOM Elements
+    const addCustomerBtn = document.getElementById('add-customer-btn');
+    const modal = document.getElementById('modal');
+    const closeModal = document.querySelector('.close');
+    const customerForm = document.getElementById('customer-form');
+    const customerTable = document.querySelector('#customer-table tbody');
+
+    // Open Modal
+    addCustomerBtn.addEventListener('click', () => {
+      modal.style.display = 'flex';
+    });
+
+    // Close Modal
+    closeModal.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    // Add/Edit Customer
+    customerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const customerName = document.getElementById('customer-name').value;
+      const customerEmail = document.getElementById('customer-email').value;
+      const customerPhone = document.getElementById('customer-phone').value;
+      addCustomer(customerName, customerEmail, customerPhone);
+      renderCustomers();
+      modal.style.display = 'none';
+    });
+
+    // Render Customers
+    function renderCustomers() {
+      customerTable.innerHTML = customers.map(customer => `
+        <tr>
+          <td>${customer.id}</td>
+          <td>${customer.name}</td>
+          <td>${customer.email}</td>
+          <td>${customer.phone}</td>
+          <td>
+            <button onclick="editCustomer(${customer.id})"><i class="fas fa-edit"></i></button>
+            <button onclick="deleteCustomer(${customer.id})"><i class="fas fa-trash"></i></button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Initial Render
+    renderCustomers();
+  </script>
+</body>
+</html>
